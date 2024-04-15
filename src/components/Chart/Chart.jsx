@@ -83,16 +83,11 @@ const PlotChart = ({ data }) => {
                     { divider: 1e6, suffix: 'M' },
                  ];
                  function formatNumber(n) {
-                  // Check if the value is negative
                   var isNegative = n < 0;
-                  // Get the absolute value for formatting
                   var absValue = Math.abs(n);
-                  
                   for (var i = 0; i < ranges.length; i++) {
                     if (absValue >= ranges[i].divider) {
-                      // Format the absolute value
                       var formattedValue = (absValue / ranges[i].divider).toString() + ranges[i].suffix;
-                      // If the original value was negative, add "-" to the formatted value
                       return isNegative ? "-" + formattedValue : formattedValue;
                     }
                   }
