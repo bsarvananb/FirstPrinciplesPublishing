@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { DatePicker, Space } from "antd";
-import { startOfQuarter } from "date-fns";
+import { DatePicker } from "antd";
 import Chart from "chart.js/auto";
 import "chartjs-adapter-date-fns";
 import "./Chart.css";
@@ -84,13 +83,22 @@ const PlotChart = ({ data }) => {
                     { divider: 1e6, suffix: 'M' },
                  ];
                  function formatNumber(n) {
-                    for (var i = 0; i < ranges.length; i++) {
-                       if (n >= ranges[i].divider) {
-                          return (n / ranges[i].divider).toString() + ranges[i].suffix;
-                       }
+                  // Check if the value is negative
+                  var isNegative = n < 0;
+                  // Get the absolute value for formatting
+                  var absValue = Math.abs(n);
+                  
+                  for (var i = 0; i < ranges.length; i++) {
+                    if (absValue >= ranges[i].divider) {
+                      // Format the absolute value
+                      var formattedValue = (absValue / ranges[i].divider).toString() + ranges[i].suffix;
+                      // If the original value was negative, add "-" to the formatted value
+                      return isNegative ? "-" + formattedValue : formattedValue;
                     }
-                    return n;
-                 }
+                  }
+                  // If the value is less than 1 million, just return it as is
+                  return n;
+                }
                  return formatNumber(value);
               }
            }
