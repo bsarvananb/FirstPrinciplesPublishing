@@ -1,6 +1,3 @@
-# FirstPrinciplesPublishing
-First Principles Publishing Round1
-
 # Getting Started with App
 
 ## Steps to run the app
